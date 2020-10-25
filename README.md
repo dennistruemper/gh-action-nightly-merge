@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Merge
-        uses: dennistruemper/gh-action-nightly-merge@v1.0.0
+        uses: dennistruemper/gh-action-nightly-merge@v2.0.0
         with:
           stable_branch: "master"
           development_branch: "devel"
