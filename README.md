@@ -1,4 +1,6 @@
-# Nightly Merge Action
+# Merge Action
+
+This is a fork of robotology/gh-action-nightly-merge
 
 Automatically merge the stable branch into the development one.
 
@@ -12,29 +14,28 @@ To enable the action simply create the `.github/workflows/nightly-merge.yml`
 file with the following content:
 
 ```yml
-name: 'Nightly Merge'
+name: "Nightly Merge"
 
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   nightly-merge:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Nightly Merge
-      uses: robotology/gh-action-nightly-merge@v1.3.1
-      with:
-        stable_branch: 'master'
-        development_branch: 'devel'
-        allow_ff: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge
+        uses: dennistruemper/gh-action-nightly-merge@v1.0.0
+        with:
+          stable_branch: "master"
+          development_branch: "devel"
+          allow_ff: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 Even though this action was created to run as a scheduled workflow,
@@ -75,7 +76,7 @@ Allow fast forward merge (default `false`). If not enabled, merges will use
 
 ### `allow_git_lfs`
 
-Allow support for repositories that use `git lfs` (default `false`). 
+Allow support for repositories that use `git lfs` (default `false`).
 
 ### `ff_only`
 
@@ -106,9 +107,9 @@ The `GITHUB_TOKEN` is still used for API calls, therefore both token should be
 available.
 
 ```yml
-      with:
-        push_token: 'FOO_TOKEN'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FOO_TOKEN: ${{ secrets.FOO_TOKEN }}
+with:
+  push_token: "FOO_TOKEN"
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  FOO_TOKEN: ${{ secrets.FOO_TOKEN }}
 ```
